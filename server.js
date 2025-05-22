@@ -40,6 +40,7 @@ app.post("/teach", async (req, res) => {
 
         helper.userPatterns[pattern.toLowerCase()] = response;
         helper.saveUserPatterns();
+        await helper.refreshPatterns();
         return res.json({ success: true, message: "Bot learned new pattern." });
     } catch (error) {
         console.error(error.response?.data || error.message);

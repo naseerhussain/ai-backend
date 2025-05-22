@@ -14,7 +14,12 @@ const openai = new OpenAIApi(configuration);
 
 let userPatterns = {};
 if (fs.existsSync(customPatternsFile)) {
-  userPatterns = JSON.parse(fs.readFileSync(customPatternsFile));
+    userPatterns = JSON.parse(fs.readFileSync(customPatternsFile));
+}
+const refreshPatterns = async () =>{
+    if (fs.existsSync(customPatternsFile)) {
+        userPatterns = JSON.parse(fs.readFileSync(customPatternsFile));
+    }
 }
 
 const negative_responses = [
@@ -112,6 +117,7 @@ module.exports = {
     saveUserPatterns,
     matchReply,
     fallbackLLMResponse,
+    refreshPatterns,
     negative_responses,
     userPatterns
 }
